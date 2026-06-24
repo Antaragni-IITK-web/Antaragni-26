@@ -68,7 +68,7 @@ export function DashboardPage() {
           <div className="w-full h-[160px] xs:h-[190px] sm:h-[260px] lg:h-[310px] xl:h-[350px] relative overflow-hidden mb-6 md:mb-8">
             {/* Main Visual */}
             <Image 
-              src="/assets/dashboard/main_image.png" 
+              src="/assets/dashboard/main_image.webp" 
               alt="Campus Ambassador Dashboard Hero" 
               fill 
               className="object-contain" 

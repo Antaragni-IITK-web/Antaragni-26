@@ -6,33 +6,33 @@ export const assets = {
   },
 
   hero: {
-    stage: "/hero/hero-stage.jpg",
-    smoke: "/hero/hero-smoke-overlay.png",
+    stage: "/hero/hero-stage.webp",
+    smoke: "/hero/hero-smoke-overlay.webp",
   },
 
   spirit: {
-    crowd: "/spirit/spirit-crowd.jpg",
-    background: "/spirit/spirit-background.jpg",
+    crowd: "/spirit/spirit-crowd.webp",
+    background: "/spirit/spirit-background.webp",
   },
 
   testimonials: {
-    main: "/testimonials/ca-testimonial.jpg",
+    main: "/testimonials/ca-testimonial.webp",
   },
 
   incentives: {
-    certificate: "/incentives/certificate.png",
-    medal: "/incentives/medal.png",
-    bottle: "/incentives/bottle.png",
-    cap: "/incentives/cap.png",
-    giftBox: "/incentives/gift-box.png",
+    certificate: "/incentives/certificate.webp",
+    medal: "/incentives/medal.webp",
+    bottle: "/incentives/bottle.webp",
+    cap: "/incentives/cap.webp",
+    giftBox: "/incentives/gift-box.webp",
   },
 
   contact: {
-    ambassador1: "/contact/ambassador-1.jpg",
-    ambassador2: "/contact/ambassador-2.jpg",
-    ambassador3: "/contact/ambassador-3.jpg",
-    ambassador4: "/contact/ambassador-4.jpg",
-    ambassador5: "/contact/ambassador-5.jpg",
+    ambassador1: "/contact/ambassador-1.webp",
+    ambassador2: "/contact/ambassador-2.webp",
+    ambassador3: "/contact/ambassador-3.webp",
+    ambassador4: "/contact/ambassador-4.webp",
+    ambassador5: "/contact/ambassador-5.webp",
   },
 
   sponsors: {

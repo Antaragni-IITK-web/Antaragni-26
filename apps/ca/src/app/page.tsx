@@ -1,11 +1,13 @@
+import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { SpiritSection } from "@/components/sections/SpiritSection";
-import { IncentivesSection } from "@/components/sections/IncentivesSection";
-import { ExpectationsSection } from "@/components/sections/ExpectationsSection";
-import { FAQSection } from "@/components/sections/FAQSection";
-import { ContactSection } from "@/components/sections/ContactSection";
-import { SponsorsSection } from "@/components/sections/SponsorsSection";
-import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
+
+const IncentivesSection = dynamic(() => import("@/components/sections/IncentivesSection").then((mod) => mod.IncentivesSection), { ssr: true });
+const ExpectationsSection = dynamic(() => import("@/components/sections/ExpectationsSection").then((mod) => mod.ExpectationsSection), { ssr: true });
+const FAQSection = dynamic(() => import("@/components/sections/FAQSection").then((mod) => mod.FAQSection), { ssr: true });
+const ContactSection = dynamic(() => import("@/components/sections/ContactSection").then((mod) => mod.ContactSection), { ssr: true });
+const SponsorsSection = dynamic(() => import("@/components/sections/SponsorsSection").then((mod) => mod.SponsorsSection), { ssr: true });
+const FinalCtaSection = dynamic(() => import("@/components/sections/FinalCtaSection").then((mod) => mod.FinalCtaSection), { ssr: true });
 
 export default function Home() {
   return (

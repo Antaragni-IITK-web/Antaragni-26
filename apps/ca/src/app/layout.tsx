@@ -8,27 +8,29 @@ import { Toaster } from "react-hot-toast";
 const helveticaNeue = localFont({
   src: [
     {
-      path: "../../public/assets/fonts/helvetica-neue-5/HelveticaNeueRoman.otf",
+      path: "../../public/assets/fonts/helvetica-neue-5/HelveticaNeueRoman.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/assets/fonts/helvetica-neue-5/HelveticaNeueMedium.otf",
+      path: "../../public/assets/fonts/helvetica-neue-5/HelveticaNeueMedium.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../public/assets/fonts/helvetica-neue-5/HelveticaNeueBold.otf",
+      path: "../../public/assets/fonts/helvetica-neue-5/HelveticaNeueBold.woff2",
       weight: "700",
       style: "normal",
     },
   ],
   variable: "--font-sans",
+  display: "swap",
 });
 
 const bodoniModa = localFont({
-  src: "../../public/assets/fonts/Bodoni_Moda/BodoniModa-VariableFont_opsz,wght.ttf",
+  src: "../../public/assets/fonts/Bodoni_Moda/BodoniModa-VariableFont_opsz,wght.woff2",
   variable: "--font-serif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

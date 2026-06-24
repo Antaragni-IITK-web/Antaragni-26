@@ -90,7 +90,7 @@ export function Navbar() {
               className="block relative w-9 h-11 cursor-pointer group"
             >
               <Image
-                src="/assets/logo.png"
+                src="/assets/logo.webp"
                 alt="Antaragni Logo"
                 fill
                 className="object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(217,35,35,0.8)]"
