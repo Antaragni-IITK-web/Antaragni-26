@@ -156,7 +156,7 @@ export const Carousel: React.FC<CarouselProps> = ({ events, options }) => {
 	}, [mainApi, thumbApi]);
 
 	const setTweenNodes = useCallback((emblaApi: EmblaCarouselType) => {
-		tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
+		tweenNodes.current = emblaApi.slideNodes().map((slideNode: HTMLElement) => {
 			return slideNode.querySelector(".embla__slide__number");
 		});
 	}, []);
@@ -172,15 +172,15 @@ export const Carousel: React.FC<CarouselProps> = ({ events, options }) => {
 			const slidesInView = emblaApi.slidesInView();
 			const isScrollEvent = eventName === "scroll";
 
-			emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
+			emblaApi.scrollSnapList().forEach((scrollSnap: number, snapIndex: number) => {
 				let diffToTarget = scrollSnap - scrollProgress;
 				const slidesInSnap = engine.slideRegistry[snapIndex];
 
-				slidesInSnap?.forEach((slideIndex) => {
+				slidesInSnap?.forEach((slideIndex: number) => {
 					if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
 
 					if (engine.options.loop) {
-						engine.slideLooper.loopPoints.forEach((loopItem) => {
+						engine.slideLooper.loopPoints.forEach((loopItem: { target: () => number; index: number }) => {
 							const target = loopItem.target();
 							if (slideIndex === loopItem.index && target !== 0) {
 								const sign = Math.sign(target);
