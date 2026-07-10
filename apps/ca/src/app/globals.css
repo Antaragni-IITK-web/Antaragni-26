@@ -2,12 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #050505;
-  --foreground: #ffffff;
-  --accent: #d92323;
-  --muted: #a3a3a3;
+/* ═══════════════════════════════════════════════════════════════════
+   ANTARAGNI '26 — "EMBER & GOLD" DESIGN SYSTEM
+   Deep black stage · crimson fire · gold legacy · ivory editorial
+   ═══════════════════════════════════════════════════════════════════ */
 
+:root {
+  /* Canvas */
+  --background: #060505;
+  --surface: #0c0a09;
+  --foreground: #f4efe6; /* ivory — warmer than pure white */
+
+  /* Fire */
+  --accent: #d92323; /* crimson — the flame */
+  --ember: #ff6b35; /* hot ember orange */
+
+  /* Legacy */
+  --gold: #d4a24e;
+  --gold-bright: #ecc879;
+  --gold-dim: rgba(212, 162, 78, 0.35);
+
+  /* Supporting */
+  --muted: #9a938a; /* warm gray */
+
+  /* Motion */
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-standard: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-hover: cubic-bezier(0.4, 0, 0.2, 1);
@@ -36,463 +54,119 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── GLOBAL MICRO-ANIMATIONS ─────────────────────────────────────────── */
+/* ─── KEYFRAMES ──────────────────────────────────────────────────── */
 
-/* Accent glow pulse — used on decorative lines and dots */
-@keyframes accent-pulse {
-  0%, 100% { opacity: 0.5; box-shadow: 0 0 0px var(--accent); }
-  50%       { opacity: 1;   box-shadow: 0 0 18px rgba(217, 35, 35, 0.6); }
+/* Spotlight breathing — scale + brightness swell */
+@keyframes light-breathe {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.06); }
 }
 
-/* Soft shimmer sweep across text */
+/* Slow smoke drift */
+@keyframes smoke-drift {
+  0%   { transform: translate3d(-2%, 1%, 0) scale(1); }
+  50%  { transform: translate3d(2.5%, -2%, 0) scale(1.05); }
+  100% { transform: translate3d(-2%, 1%, 0) scale(1); }
+}
+
+/* Metallic shimmer sweep (gold text) */
 @keyframes shimmer {
   0%   { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
 
-/* Subtle floating bob for hero / decorative elements */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
-}
-
-/* Slow horizontal drift used on background noise layers */
-@keyframes drift {
-  0%   { transform: translateX(0) translateY(0); }
-  50%  { transform: translateX(8px) translateY(-6px); }
-  100% { transform: translateX(0) translateY(0); }
-}
-
 /* Grain flicker */
 @keyframes grain {
   0%, 100% { transform: translate(0, 0); }
-  10%       { transform: translate(-2%, -3%); }
-  30%       { transform: translate(3%, 1%); }
-  50%       { transform: translate(-1%, 4%); }
-  70%       { transform: translate(4%, -2%); }
-  90%       { transform: translate(-3%, 3%); }
+  20%      { transform: translate(-2%, 3%); }
+  40%      { transform: translate(3%, -1%); }
+  60%      { transform: translate(-1%, -3%); }
+  80%      { transform: translate(2%, 2%); }
 }
 
-/* Horizontal scan line — used as a subtle decorative element */
-@keyframes scan {
+/* Marquee scroll */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Scroll cue line drop */
+@keyframes cue-drop {
   0%   { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+  55%  { transform: translateY(100%); }
+  100% { transform: translateY(100%); }
 }
 
-/* Underline expand from left */
-@keyframes underline-expand {
-  0%   { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
-}
+/* ─── UTILITIES ──────────────────────────────────────────────────── */
 
-/* ─── UTILITY CLASSES ────────────────────────────────────────────────────*/
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-accent-pulse {
-  animation: accent-pulse 3s ease-in-out infinite;
-}
-
-.animate-drift {
-  animation: drift 8s ease-in-out infinite;
-}
-
-/* Text shimmer — wrap text in this class for a metallic sweep effect */
-.text-shimmer {
+/* Gold metallic text */
+.text-gold-shimmer {
   background: linear-gradient(
-    90deg,
-    rgba(255,255,255,0.6) 0%,
-    rgba(255,255,255,1) 40%,
-    rgba(255,255,255,0.6) 60%,
-    rgba(255,255,255,1) 100%
+    100deg,
+    #a97e35 0%,
+    var(--gold) 25%,
+    var(--gold-bright) 50%,
+    var(--gold) 75%,
+    #a97e35 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 4s linear infinite;
+  animation: shimmer 5s linear infinite;
 }
 
-/* Accent line that pulses */
-.line-accent-animated {
-  background: var(--accent);
-  animation: accent-pulse 2.5s ease-in-out infinite;
-}
-
-/* Section entrance — apply with JS/framer for scroll-triggered reveals */
-.section-entrance {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 1.2s var(--ease-premium), transform 1.2s var(--ease-premium);
-}
-.section-entrance.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ─── INTERACTIVE BUTTON IMPROVEMENTS ────────────────────────────────── */
-
-/* Premium border-glow button effect */
-.btn-glow {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s var(--ease-hover);
-}
-.btn-glow::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(217, 35, 35, 0.25) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s var(--ease-hover);
-}
-.btn-glow:hover::before {
-  opacity: 1;
-}
-.btn-glow::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(135deg, transparent 30%, rgba(217, 35, 35, 0.6) 50%, transparent 70%);
-  opacity: 0;
-  border-radius: inherit;
-  transition: opacity 0.5s var(--ease-hover);
-  background-size: 200% 200%;
-  animation: shimmer 3s linear infinite;
-}
-.btn-glow:hover::after {
-  opacity: 1;
-}
-
-/* ─── INCENTIVES SECTION CSS ─────────────────────────────────────────── */
-
-.spotlight-overlay {
-  position: absolute;
-  top: -10%;
-  left: 0;
-  width: 100%;
-  height: 120%;
-  pointer-events: none;
-  z-index: 5;
-  will-change: transform;
-  mix-blend-mode: screen;
-  background:
-    radial-gradient(ellipse 380px 1050px at 50% 0%,
-      rgba(255, 253, 235, 0.42) 0%,
-      rgba(255, 250, 215, 0.28) 15%,
-      rgba(255, 245, 195, 0.13) 35%,
-      rgba(255, 240, 180, 0.04) 55%,
-      transparent 75%),
-    radial-gradient(ellipse 750px 700px at 50% 0%,
-      rgba(255, 245, 195, 0.08) 0%,
-      rgba(255, 235, 170, 0.02) 40%,
-      transparent 70%);
-}
-
-/* ---- Stage Layout ---------------------------------------------------- */
-
-.stage-wrapper {
-  position: relative;
-  width: 100%;
-  flex: 1 1 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  /* 
-    Bottom padding creates the label zone below the pedestal image edge.
-    clamp: 70px on small screens → up to 90px on wide screens.
-  */
-  padding-bottom: clamp(70px, 5.2vw, 92px);
-  container-type: size;
-}
-
-.stage-container {
-  position: relative;
-  width: 100%;
-  container-type: inline-size;
-}
-
-.stage-base {
-  display: block;
-  width: 100%;
-  height: auto;
-  pointer-events: none;
-  margin-top: -8.5cqw;
-}
-
-.stage-area {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  gap: 0;
-  z-index: 2;
-  /*
-    The pedestal image has visual dead space on its left/right edges — the 4 marble slabs
-    don't span the full image width. This padding aligns the flex columns with the slabs.
-  */
-  padding-left: 3.5%;
-  padding-right: 3.5%;
-}
-
-/* ---- Item Columns ---------------------------------------------------- */
-
-/* Intro animation via class toggle — keeps inline style clear for hover transform */
-.item-column {
-  position: relative;
-  flex: 1 1 0;
-  height: 100%;
-  perspective: 900px;
-  /* Start hidden for intro animation */
-  opacity: 0;
-  transform: translateY(60px);
-  /* Both opacity + transform transitions live here */
-  transition:
-    opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Intro animation: JS adds this class after mount */
-.item-column.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Hover lifts the column — only applies once is-visible, so no flash */
-.item-column.is-visible:hover {
-  transform: translateY(-14px) scale(1.04);
-}
-
-/* ---- Item Image ------------------------------------------------------- */
-
-.item-img-wrap {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  height: min(51cqw, 88cqh);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 0 0.2vw;
-  pointer-events: none;
-}
-
-/* GPU layer promotion — prevents drop-shadow rasterization blurring on hover scale */
-.item-img {
-  max-height: 100%;
-  width: auto;
-  max-width: 120%;
-  object-fit: contain;
-  display: block;
-  /* Promote to GPU compositing layer at native resolution BEFORE hover happens */
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform, filter;
-  filter:
-    drop-shadow(0 28px 55px rgba(0, 0, 0, 0.92))
-    drop-shadow(0 8px 20px rgba(0, 0, 0, 0.75));
-  transition:
-    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.55s ease;
-  pointer-events: auto;
-  transform-origin: bottom center;
-}
-
-/* Keep translateZ(0) on hover so the GPU layer stays active during scale */
-.item-column:hover .item-img {
-  transform: translateZ(0) scale(1.05);
-  filter:
-    drop-shadow(0 44px 88px rgba(0, 0, 0, 0.95))
-    drop-shadow(0 14px 34px rgba(255, 184, 77, 0.28))
-    drop-shadow(0 0 52px rgba(255, 255, 255, 0.09));
-}
-
-/* ---- Item Label ------------------------------------------------------- */
-
-/*
-  The label sits BELOW the pedestal base — positioned relative to .item-column.
-  bottom is negative: it reaches into the padding-bottom zone of .stage-wrapper.
-  clamp matches the stage-wrapper padding-bottom so labels don't overflow.
-*/
-.item-label {
-  position: absolute;
-  bottom: calc(-1 * clamp(60px, 4.6vw, 82px));
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 5px;
-  padding: 0 4px;
-}
-
-.item-number {
-  font-size: clamp(0.6rem, 0.75vw, 0.85rem);
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  display: block;
-  /* Number transitions to accent glow on hover */
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.item-column.is-visible:hover .item-number {
-  text-shadow: 0 0 12px rgba(217, 35, 35, 0.7);
-}
-
-.item-name {
-  font-size: clamp(0.55rem, 0.72vw, 0.8rem);
-  font-weight: 700;
-  letter-spacing: 0.28em;
-  line-height: 1.4;
-  display: block;
-  transition: color 0.3s ease, letter-spacing 0.4s var(--ease-hover);
-}
-
-.item-column.is-visible:hover .item-name {
-  letter-spacing: 0.35em;
-}
-
-/* Decorative underline that expands on hover */
-.item-label::after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 1px;
-  background: var(--accent);
-  margin: 4px auto 0;
-  transition: width 0.4s var(--ease-hover);
-  opacity: 0.7;
-}
-.item-column.is-visible:hover .item-label::after {
-  width: 24px;
-}
-
-/* ─── INCENTIVES TITLE / TAGLINE ROW ────────────────────────────────── */
-
-.incentives-header {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-shrink: 0;
-  padding-bottom: clamp(1.5rem, 3vw, 3rem);
-  margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
-}
-
-@media (min-width: 768px) {
-  .incentives-header {
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 2rem;
-  }
-}
-
-.incentives-taglines {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: clamp(0.8rem, 2.5vw, 3rem);
-  align-items: flex-start;
-  padding-bottom: 0.5rem;
-  flex-shrink: 0;
-}
-
-.incentives-tagline-item {
-  font-size: clamp(0.6rem, 0.85vw, 0.9rem);
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: var(--accent);
-  white-space: nowrap;
-  position: relative;
-  transition: opacity 0.3s ease;
-}
-
-.incentives-tagline-item::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent);
-  transition: width 0.4s var(--ease-hover);
-}
-
-.incentives-header:hover .incentives-tagline-item::after {
-  width: 100%;
-}
-
-/* ─── SECTION-LEVEL DECORATIVE ELEMENTS ─────────────────────────────── */
-
-/* Subtle horizontal scan line used in hero / cta sections */
-.scan-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
-  animation: scan 8s linear infinite;
-  pointer-events: none;
-}
-
-/* Film grain overlay — apply to sections for cinematic texture */
+/* Film grain overlay */
 .grain-overlay {
   position: absolute;
   inset: -50%;
   width: 200%;
   height: 200%;
-  opacity: 0.028;
+  opacity: 0.03;
   mix-blend-mode: screen;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  animation: grain 0.5s steps(1) infinite;
+  animation: grain 0.6s steps(2) infinite;
 }
 
-/* ─── NAVIGATION ENHANCEMENTS ────────────────────────────────────────── */
-
-/* Active nav link indicator */
-.nav-link-active {
-  color: white;
-  position: relative;
-}
-.nav-link-active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
+/* Editorial rule with gold fade */
+.rule-gold {
   height: 1px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--gold), transparent);
 }
 
-/* ─── SCROLLBAR ──────────────────────────────────────────────────────── */
+/* Section base — every act anchors its own absolute layers and clips them */
+.act {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Marquee track */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+
+/* ─── SCROLLBAR / SELECTION ──────────────────────────────────────── */
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(217, 35, 35, 0.4);
+  background: linear-gradient(var(--accent), var(--gold));
   border-radius: 2px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(217, 35, 35, 0.7);
-}
-
-/* ─── SELECTION ──────────────────────────────────────────────────────── */
 
 ::selection {
-  background: rgba(217, 35, 35, 0.3);
+  background: rgba(212, 162, 78, 0.35);
   color: #ffffff;
 }

@@ -11,8 +11,12 @@ const config: Config = {
     extend: {
       colors: {
         background: "var(--background)",
+        surface: "var(--surface)",
         foreground: "var(--foreground)",
         accent: "var(--accent)",
+        ember: "var(--ember)",
+        gold: "var(--gold)",
+        "gold-bright": "var(--gold-bright)",
         muted: "var(--muted)",
       },
       fontFamily: {

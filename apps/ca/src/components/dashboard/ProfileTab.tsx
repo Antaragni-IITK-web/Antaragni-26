@@ -1,6 +1,28 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useStore } from "@repo/store";
+import { CountUp } from "../motion/CountUp";
+
+/** Ambassador tiers — thresholds in points */
+const TIERS = [
+  { name: "Rising Ambassador", min: 0 },
+  { name: "Torch Bearer", min: 100 },
+  { name: "Flame Keeper", min: 300 },
+  { name: "Legend of the Stage", min: 600 },
+];
+
+function getTier(points: number) {
+  const idx = TIERS.reduce((acc, t, i) => (points >= t.min ? i : acc), 0);
+  const current = TIERS[idx]!;
+  const next = TIERS[idx + 1];
+  const progress = next
+    ? Math.min(1, (points - current.min) / (next.min - current.min))
+    : 1;
+  return { current, next, progress };
+}
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function ProfileTab() {
   const { user } = useStore();
@@ -8,8 +30,89 @@ export function ProfileTab() {
 
   if (!data) return <div className="p-10 text-white/50 text-center">Loading profile...</div>;
 
+  const points = Number(data.points ?? 0) || 0;
+  const { current, next, progress } = getTier(points);
+  const initial = (data.name ?? "?").trim().charAt(0).toUpperCase();
+
   return (
-    <div className="w-full border border-white/10 bg-white/[0.02] backdrop-blur-md rounded-xl p-8 md:p-10 relative">
+    <div className="flex w-full flex-col gap-6">
+      {/* ── Ambassador status card ─────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: EASE }}
+        className="relative w-full overflow-hidden rounded-xl border border-gold/25 bg-gradient-to-br from-gold/[0.07] via-white/[0.02] to-transparent p-6 backdrop-blur-md md:p-8"
+      >
+        {/* warm glow */}
+        <div
+          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(212,162,78,0.15), transparent 70%)" }}
+        />
+        <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-5">
+            {/* Avatar */}
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-black/40 font-serif text-2xl text-gold shadow-[0_0_24px_rgba(212,162,78,0.25)] md:h-20 md:w-20 md:text-3xl">
+              {initial}
+            </div>
+            <div className="min-w-0">
+              <div className="mb-1 text-[9px] font-semibold uppercase tracking-[0.3em] text-gold md:text-[10px]">
+                {current.name}
+              </div>
+              <h2 className="truncate font-serif text-xl text-foreground md:text-3xl">{data.name}</h2>
+              <div className="mt-1 truncate text-[11px] uppercase tracking-[0.16em] text-muted">
+                {data.college}
+              </div>
+            </div>
+          </div>
+
+          {/* Legacy Score */}
+          <div className="flex shrink-0 flex-col md:items-end">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.3em] text-muted md:text-[10px]">
+              Legacy Score
+            </span>
+            <span className="font-serif text-4xl leading-none text-foreground md:text-5xl">
+              <CountUp value={points} duration={1.4} />
+            </span>
+          </div>
+        </div>
+
+        {/* Progress to next tier */}
+        <div className="relative z-10 mt-7">
+          <div className="mb-2 flex items-center justify-between text-[9px] uppercase tracking-[0.24em] text-muted md:text-[10px]">
+            <span>{current.name}</span>
+            <span>{next ? `${next.min - points} pts to ${next.name}` : "Maximum tier reached"}</span>
+          </div>
+          <div className="h-[5px] w-full overflow-hidden rounded-full bg-white/[0.06]">
+            <motion.div
+              className="relative h-full rounded-full bg-gradient-to-r from-accent via-ember to-gold"
+              initial={{ width: 0 }}
+              animate={{ width: `${Math.max(progress * 100, 2)}%` }}
+              transition={{ duration: 1.4, ease: EASE, delay: 0.3 }}
+            />
+          </div>
+          {/* tier milestones */}
+          <div className="mt-3 hidden items-center justify-between md:flex">
+            {TIERS.map((t) => (
+              <div
+                key={t.name}
+                className={`flex items-center gap-2 text-[9px] uppercase tracking-[0.18em] ${
+                  points >= t.min ? "text-gold" : "text-white/25"
+                }`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    points >= t.min ? "bg-gold shadow-[0_0_8px_rgba(212,162,78,0.8)]" : "bg-white/15"
+                  }`}
+                />
+                {t.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ── Detail grid ────────────────────────────────────────────── */}
+      <div className="w-full border border-white/10 bg-white/[0.02] backdrop-blur-md rounded-xl p-8 md:p-10 relative">
       {/* Outer row wrapper with a single continuous vertical line */}
       <div className="flex flex-col relative w-full">
         {/* Continuous Vertical Divider */}
@@ -188,6 +291,7 @@ export function ProfileTab() {
           <div className="hidden md:block py-4 md:pl-8" />
         </div>
 
+      </div>
       </div>
     </div>
   );

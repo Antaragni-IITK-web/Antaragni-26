@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { addData, getAllDocs, getDate, queryData, time } from "@repo/firebase";
 import { useStore } from "@repo/store";
 import toast from "react-hot-toast";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 interface Task {
   uid: string;
@@ -168,75 +171,108 @@ export function TasksTab() {
         </div>
       ) : (
       <div className="flex flex-col w-full">
-        {/* Table Header */}
-        <div className="hidden md:grid grid-cols-12 text-[11px] font-sans font-semibold tracking-[0.18em] text-white/40 uppercase pb-5 px-6 md:px-8 border-b border-white/5">
-          <div className="col-span-6">DESCRIPTION</div>
-          <div className="col-span-3">DEADLINE</div>
-          <div className="col-span-1 text-center">POINTS</div>
-          <div className="col-span-2 text-right">ACTIONS</div>
-        </div>
-
-        {/* Table Body */}
-        <div className="flex flex-col mt-2">
-          {tasks.map((task) => (
-            <div
-              key={task.uid}
-              className="grid grid-cols-12 items-center py-4.5 px-6 md:px-8 border-b border-white/5 last:border-none min-h-[72px] gap-3 md:gap-0 transition-all duration-200 hover:bg-white/[0.015]"
-            >
-              {/* Description */}
-              <div className="col-span-12 md:col-span-6 pr-0 md:pr-6">
-                <span className="text-[14px] md:text-[15px] font-sans font-medium text-white leading-relaxed break-words">
-                  {task.desc}
+        {/* ── Missions progress summary ─────────────────────────────── */}
+        {(() => {
+          const done = tasks.filter((t) => t.link !== undefined).length;
+          const pct = tasks.length ? (done / tasks.length) * 100 : 0;
+          return (
+            <div className="mb-8 px-1">
+              <div className="mb-2 flex items-end justify-between">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold md:text-[11px]">
+                  Your Missions
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-muted">
+                  {done} / {tasks.length} complete
                 </span>
               </div>
-
-              {/* Deadline */}
-              <div className="col-span-6 md:col-span-3 flex items-center">
-                <svg
-                  className="w-4 h-4 text-white/40 mr-2 flex-shrink-0"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
-                  />
-                </svg>
-                <span className="text-[13px] font-sans font-medium text-white/60">
-                  {task.deadline ? getDate(task.deadline).toString() : "No Deadline"}
-                </span>
-              </div>
-
-              {/* Points */}
-              <div className="col-span-2 md:col-span-1 text-center md:text-center flex justify-start md:justify-center">
-                <span className="text-[14px] md:text-[15px] font-sans font-semibold text-white/90">
-                  {task.points}
-                </span>
-              </div>
-
-              {/* Actions */}
-              <div className="col-span-4 md:col-span-2 text-right">
-                {task.link !== undefined ? (
-                  <span className="text-[12px] font-sans font-bold uppercase tracking-wider text-white/70">
-                    {task.award !== undefined ? `Awarded: ${task.award}` : "In Review"}
-                  </span>
-                ) : (
-                  <button 
-                    onClick={() => {
-                      setCurrentTask(task);
-                      setIsOpen(true);
-                    }}
-                    className="w-full max-w-[96px] md:max-w-none md:w-28 py-2 bg-accent hover:bg-red-600 active:bg-accent text-[11px] font-sans font-bold uppercase tracking-wider text-white rounded-md transition-colors duration-200 shadow-lg shadow-accent/10"
-                  >
-                    SUBMIT
-                  </button>
-                )}
+              <div className="h-[4px] w-full overflow-hidden rounded-full bg-white/[0.06]">
+                <motion.div
+                  className="h-full rounded-full bg-gradient-to-r from-accent via-ember to-gold"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${pct}%` }}
+                  transition={{ duration: 1.2, ease: EASE, delay: 0.2 }}
+                />
               </div>
             </div>
-          ))}
+          );
+        })()}
+
+        {/* ── Mission cards ─────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
+          {tasks.map((task, i) => {
+            const submitted = task.link !== undefined;
+            const awarded = submitted && task.award !== undefined;
+            return (
+              <motion.div
+                key={task.uid}
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: EASE, delay: 0.1 + i * 0.07 }}
+                className={`group relative flex flex-col overflow-hidden rounded-xl border p-5 transition-all duration-300 md:p-6 ${
+                  awarded
+                    ? "border-gold/40 bg-gold/[0.05]"
+                    : submitted
+                      ? "border-white/15 bg-white/[0.03]"
+                      : "border-white/10 bg-white/[0.02] hover:border-gold/35 hover:bg-white/[0.035] hover:shadow-[0_10px_36px_rgba(0,0,0,0.45),0_0_22px_rgba(212,162,78,0.08)]"
+                }`}
+              >
+                {/* Mission header */}
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
+                    Mission {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {awarded ? (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.3 + i * 0.07 }}
+                      className="flex items-center gap-1.5 rounded-full border border-gold/50 bg-gold/15 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-gold"
+                    >
+                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                      +{task.award} PTS
+                    </motion.span>
+                  ) : submitted ? (
+                    <span className="rounded-full border border-white/20 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white/60">
+                      In Review
+                    </span>
+                  ) : (
+                    <span className="rounded-full border border-gold/30 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white/70">
+                      {task.points} PTS
+                    </span>
+                  )}
+                </div>
+
+                {/* Description */}
+                <p className="mb-5 flex-1 text-[14px] font-medium leading-relaxed text-foreground md:text-[15px]">
+                  {task.desc}
+                </p>
+
+                {/* Footer: deadline + action */}
+                <div className="flex items-center justify-between gap-3">
+                  <span className="flex items-center text-[12px] text-white/50">
+                    <svg className="mr-2 h-4 w-4 shrink-0 text-white/35" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                    </svg>
+                    {task.deadline ? getDate(task.deadline).toString() : "No Deadline"}
+                  </span>
+
+                  {!submitted && (
+                    <button
+                      onClick={() => {
+                        setCurrentTask(task);
+                        setIsOpen(true);
+                      }}
+                      className="shrink-0 rounded-md bg-accent px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-white shadow-lg shadow-accent/10 transition-all duration-200 hover:bg-red-600 hover:shadow-accent/25 active:scale-95"
+                    >
+                      SUBMIT
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
       )}

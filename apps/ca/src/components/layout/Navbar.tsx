@@ -11,11 +11,11 @@ import { firebaseGetUser, firebaseGoogleSignIn, firebaseLogout } from "@repo/fir
 
 const LINKS = [
   { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Benefits", href: "#incentives" },
-  { label: "Roles", href: "#roles" },
+  { label: "Legacy", href: "#legacy" },
+  { label: "The Role", href: "#why" },
+  { label: "Journey", href: "#journey" },
+  { label: "Rewards", href: "#rewards" },
   { label: "FAQ", href: "#faq" },
-  { label: "Sponsors", href: "#sponsors" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -24,7 +24,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { user, setUser, setLoading } = useStore();
+  const { user, setUser, setLoading, lenis } = useStore();
 
   const handleLogin = async () => {
     if (!user) {
@@ -55,7 +55,12 @@ export function Navbar() {
       e.preventDefault();
       const targetId = href.replace(/.*#/, "");
       const elem = document.getElementById(targetId);
-      if (elem) elem.scrollIntoView({ behavior: "smooth" });
+      if (!elem) return;
+      if (lenis) {
+        lenis.scrollTo(elem, { offset: -72, duration: 1.4 });
+      } else {
+        elem.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
