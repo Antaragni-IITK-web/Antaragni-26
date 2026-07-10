@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { IncentivesLayoutConfig, ElementTransform, defaultTransform, incentivesLayout } from "@/config/incentives-layout";
 
 type EditorMode = "drag" | "scale" | "rotate" | "none";
@@ -33,7 +33,9 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const updateTransform = (id: string, updates: Partial<ElementTransform>) => {
+  // Stable identity: consumers (useDraggable) keep pointer listeners alive across
+  // renders; a fresh closure here would tear the listeners down mid-drag.
+  const updateTransform = useCallback((id: string, updates: Partial<ElementTransform>) => {
     setLayout((prev) => ({
       ...prev,
       [id]: {
@@ -41,7 +43,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
         ...updates,
       },
     }));
-  };
+  }, []);
 
   const saveLayout = async () => {
     try {

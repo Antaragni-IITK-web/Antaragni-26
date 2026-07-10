@@ -60,7 +60,9 @@ export function TasksTab() {
         setTasks(fetchedTasks);
       }
     } catch (error) {
-      toast.error(`${error}`);
+      // [SECURITY] Do not expose raw Firebase error to user
+      console.error("Tasks fetch error:", error);
+      toast.error("Could not load tasks. Please try again.");
     } finally {
       setLoading(false);
     }

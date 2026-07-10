@@ -97,7 +97,9 @@ export function LeaderboardTab() {
         setData(entries);
       }
     } catch (error) {
-      toast.error(`${error}`);
+      // [SECURITY] Do not expose raw Firebase error to user
+      console.error("Leaderboard fetch error:", error);
+      toast.error("Could not load the leaderboard. Please try again.");
     } finally {
       setLoading(false);
     }

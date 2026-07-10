@@ -16,8 +16,10 @@ const elementTransformSchema = z.object({
 const layoutSchema = z.record(z.string(), elementTransformSchema);
 
 export async function POST(req: Request) {
-  // Security check: Only allow in development mode or if explicitly enabled
-  if (process.env.NODE_ENV !== "development" && process.env.NEXT_PUBLIC_EDITOR_MODE !== "true") {
+  // Security check: this endpoint writes a source file on the server, so outside
+  // development it must be enabled via a server-only env var — never a NEXT_PUBLIC_
+  // flag, which is exposed in the client bundle and would let any visitor trigger writes.
+  if (process.env.NODE_ENV !== "development" && process.env.EDITOR_MODE !== "true") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
   }
 

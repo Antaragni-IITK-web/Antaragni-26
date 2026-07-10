@@ -98,6 +98,7 @@ export function Navbar() {
                 src="/assets/logo.webp"
                 alt="Antaragni Logo"
                 fill
+                sizes="36px"
                 className="object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(217,35,35,0.8)]"
                 priority
               />
