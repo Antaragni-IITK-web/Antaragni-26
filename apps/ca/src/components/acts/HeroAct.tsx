@@ -135,7 +135,7 @@ export function HeroAct() {
         {/* the promise */}
         <div className="mt-6 max-w-[620px] md:mt-9">
           <AnimatedText
-            text={["THE STAGE IS BIGGER", "THAN YOU IMAGINE."]}
+            text={["CAMPUS AMBASSADOR", "PROGRAM"]}
             split="lines"
             stagger={0.14}
             delay={1.1}
