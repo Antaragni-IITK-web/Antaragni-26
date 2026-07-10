@@ -60,12 +60,12 @@ export function PartnersAct() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.9, ease: EASE }}
-            className="mx-auto w-full max-w-[1440px] px-6 py-24 md:px-10 md:py-32 lg:px-20"
+            className="mx-auto w-full max-w-[1440px] px-6 py-14 md:px-10 md:py-16 lg:px-20"
           >
             <h3 className="text-center text-[16px] font-semibold uppercase tracking-[0.4em] text-accent md:text-[17px]">
               {tier.heading}
             </h3>
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:mt-16 lg:gap-24 xl:gap-36">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:mt-12 lg:gap-24 xl:gap-36">
               {tier.partners.map((p) => (
                 <LogoCard key={p.id} src={p.src} name={p.name} />
               ))}
