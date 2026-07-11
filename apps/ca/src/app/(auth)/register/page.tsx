@@ -330,7 +330,7 @@ export default function Login() {
 						</LabelInputContainer>
 					</form>
 						<button 
-							className="mt-6 bg-accent hover:bg-red-600 text-white px-8 py-3 rounded-full font-sans font-medium uppercase tracking-[0.12em] transition-all duration-300" 
+							className="mt-6 bg-accent hover:bg-red-600 text-white px-8 py-3 rounded-full font-serif font-medium uppercase tracking-[0.12em] transition-all duration-300" 
 							onClick={register}
 						>
 							Register &rarr;

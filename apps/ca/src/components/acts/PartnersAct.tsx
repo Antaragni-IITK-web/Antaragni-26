@@ -62,7 +62,7 @@ export function PartnersAct() {
             transition={{ duration: 0.9, ease: EASE }}
             className="mx-auto w-full max-w-[1440px] px-6 py-14 md:px-10 md:py-16 lg:px-20"
           >
-            <h3 className="text-center text-[16px] font-semibold uppercase tracking-[0.4em] text-accent md:text-[17px]">
+            <h3 className="text-center font-serif text-[16px] font-semibold uppercase tracking-[0.4em] text-accent md:text-[17px]">
               {tier.heading}
             </h3>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:mt-12 lg:gap-24 xl:gap-36">

@@ -130,21 +130,21 @@ export function Navbar() {
                 {(!user) ? (
                   <button
                     onClick={handleLogin}
-                    className="relative overflow-hidden bg-accent text-white px-6 py-2.5 rounded-full font-sans font-medium text-[12px] uppercase tracking-[0.08em] hover:bg-red-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_18px_rgba(217,35,35,0.25)] hover:shadow-[0_0_30px_rgba(217,35,35,0.5)] group"
+                    className="relative overflow-hidden bg-accent text-white px-6 py-2.5 rounded-full font-serif font-medium text-[12px] uppercase tracking-[0.08em] hover:bg-red-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_18px_rgba(217,35,35,0.25)] hover:shadow-[0_0_30px_rgba(217,35,35,0.5)] group"
                   >
                     <span className="relative z-10">SIGN UP / JOIN US</span>
                   </button>
                 ) : pathname === "/dashboard" || pathname === "/register" ? (
                   <button
                     onClick={handleLogin}
-                    className="relative overflow-hidden bg-accent text-white px-6 py-2.5 rounded-full font-sans font-medium text-[12px] uppercase tracking-[0.08em] hover:bg-red-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_18px_rgba(217,35,35,0.25)] hover:shadow-[0_0_30px_rgba(217,35,35,0.5)] group"
+                    className="relative overflow-hidden bg-accent text-white px-6 py-2.5 rounded-full font-serif font-medium text-[12px] uppercase tracking-[0.08em] hover:bg-red-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_18px_rgba(217,35,35,0.25)] hover:shadow-[0_0_30px_rgba(217,35,35,0.5)] group"
                   >
                     <span className="relative z-10">Log Out</span>
                   </button>
                 ) : (
                   <Link
                     href="/dashboard"
-                    className="relative overflow-hidden bg-accent text-white px-6 py-2.5 rounded-full font-sans font-medium text-[12px] uppercase tracking-[0.08em] hover:bg-red-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_18px_rgba(217,35,35,0.25)] hover:shadow-[0_0_30px_rgba(217,35,35,0.5)] group"
+                    className="relative overflow-hidden bg-accent text-white px-6 py-2.5 rounded-full font-serif font-medium text-[12px] uppercase tracking-[0.08em] hover:bg-red-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_18px_rgba(217,35,35,0.25)] hover:shadow-[0_0_30px_rgba(217,35,35,0.5)] group"
                   >
                     <span className="relative z-10">Dashboard</span>
                   </Link>
@@ -200,7 +200,7 @@ export function Navbar() {
                   key={link.label}
                   href={pathname === "/" ? link.href : `/${link.href}`}
                   onClick={(e) => handleScroll(e, link.href)}
-                  className="text-white/70 hover:text-white text-[13px] font-sans font-medium uppercase tracking-[0.2em] transition-colors duration-200 border-b border-white/5 pb-8 last:border-0 last:pb-0"
+                  className="text-white/70 hover:text-white text-[13px] font-serif font-medium uppercase tracking-[0.2em] transition-colors duration-200 border-b border-white/5 pb-8 last:border-0 last:pb-0"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
@@ -221,7 +221,7 @@ export function Navbar() {
                       handleLogin();
                       setMobileOpen(false);
                     }}
-                    className="mt-4 w-full flex items-center justify-center bg-accent hover:bg-red-600 text-white py-3 rounded-full font-sans font-medium text-[12px] uppercase tracking-[0.12em] transition-colors duration-300"
+                    className="mt-4 w-full flex items-center justify-center bg-accent hover:bg-red-600 text-white py-3 rounded-full font-serif font-medium text-[12px] uppercase tracking-[0.12em] transition-colors duration-300"
                   >
                     SIGN UP / JOIN US
                   </button>
@@ -231,14 +231,14 @@ export function Navbar() {
                       handleLogin();
                       setMobileOpen(false);
                     }}
-                    className="mt-4 w-full flex items-center justify-center bg-accent hover:bg-red-600 text-white py-3 rounded-full font-sans font-medium text-[12px] uppercase tracking-[0.12em] transition-colors duration-300"
+                    className="mt-4 w-full flex items-center justify-center bg-accent hover:bg-red-600 text-white py-3 rounded-full font-serif font-medium text-[12px] uppercase tracking-[0.12em] transition-colors duration-300"
                   >
                     Log Out
                   </button>
                 ) : (
                   <Link
                     href="/dashboard"
-                    className="mt-4 w-full flex items-center justify-center bg-accent hover:bg-red-600 text-white py-3 rounded-full font-sans font-medium text-[12px] uppercase tracking-[0.12em] transition-colors duration-300"
+                    className="mt-4 w-full flex items-center justify-center bg-accent hover:bg-red-600 text-white py-3 rounded-full font-serif font-medium text-[12px] uppercase tracking-[0.12em] transition-colors duration-300"
                     onClick={() => setMobileOpen(false)}
                   >
                     Dashboard

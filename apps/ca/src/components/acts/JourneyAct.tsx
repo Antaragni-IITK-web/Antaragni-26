@@ -110,7 +110,7 @@ export function JourneyAct() {
                   <span className="font-serif text-3xl leading-none text-white/[0.13] transition-colors duration-500 group-hover:text-gold/50 md:text-4xl">
                     {step.num}
                   </span>
-                  <h3 className="mt-2 text-[13px] font-bold uppercase tracking-[0.2em] text-foreground md:mt-3 md:text-[14px]">
+                  <h3 className="mt-2 font-serif text-[13px] font-bold uppercase tracking-[0.2em] text-foreground md:mt-3 md:text-[14px]">
                     {step.title}
                   </h3>
                   <p className="mt-2 max-w-[260px] text-[12px] leading-[1.8] text-muted md:mt-3 md:text-[13px]">

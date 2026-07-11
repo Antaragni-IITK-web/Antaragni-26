@@ -50,7 +50,7 @@ export function DashboardPage() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`relative pb-2.5 text-[11px] md:text-[12px] font-sans font-semibold uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
+                className={`relative pb-2.5 text-[11px] md:text-[12px] font-serif font-semibold uppercase tracking-[0.15em] transition-colors duration-300 whitespace-nowrap ${
                   activeTab === tab ? "text-accent font-bold" : "text-white/60 hover:text-white"
                 }`}
               >

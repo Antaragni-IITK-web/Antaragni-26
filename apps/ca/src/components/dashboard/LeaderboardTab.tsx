@@ -53,7 +53,7 @@ function PodiumSpot({ entry, isUser }: { entry?: LeaderboardEntry; isUser: boole
           </motion.span>
         )}
         <span
-          className={`max-w-[130px] truncate text-[11px] font-bold uppercase tracking-[0.1em] md:max-w-[180px] md:text-[13px] ${
+          className={`max-w-[130px] truncate font-serif text-[11px] font-bold uppercase tracking-[0.1em] md:max-w-[180px] md:text-[13px] ${
             isUser ? "text-gold" : "text-foreground"
           }`}
           title={entry.name}
@@ -152,10 +152,10 @@ export function LeaderboardTab() {
                       : "hover:bg-white/[0.02]"
                   }`}
                 >
-                  <div className={`col-span-2 text-[15px] font-bold leading-none md:text-[16px] ${mine ? "text-gold" : "text-white/70"}`}>
+                  <div className={`col-span-2 font-serif text-[15px] font-bold leading-none md:text-[16px] ${mine ? "text-gold" : "text-white/70"}`}>
                     {entry.rank}
                   </div>
-                  <div className={`col-span-7 truncate text-[14px] font-bold uppercase leading-none tracking-[0.08em] md:col-span-8 md:text-[15px] ${mine ? "text-foreground" : "text-white/90"}`}>
+                  <div className={`col-span-7 truncate font-serif text-[14px] font-bold uppercase leading-none tracking-[0.08em] md:col-span-8 md:text-[15px] ${mine ? "text-foreground" : "text-white/90"}`}>
                     {entry.name}
                     {mine && (
                       <span className="ml-3 rounded-full border border-gold/50 px-2 py-0.5 text-[9px] tracking-[0.2em] text-gold">
@@ -163,7 +163,7 @@ export function LeaderboardTab() {
                       </span>
                     )}
                   </div>
-                  <div className={`col-span-3 text-right text-[14px] font-bold leading-none tracking-wider md:col-span-2 md:text-[15px] ${mine ? "text-gold" : "text-white/90"}`}>
+                  <div className={`col-span-3 text-right font-serif text-[14px] font-bold leading-none tracking-wider md:col-span-2 md:text-[15px] ${mine ? "text-gold" : "text-white/90"}`}>
                     {entry.points}
                   </div>
                 </motion.div>

@@ -78,7 +78,7 @@ export function WhyAct() {
                   <span className="font-serif text-4xl text-white/[0.13] transition-colors duration-500 group-hover:text-gold/40 md:text-5xl">
                     {p.num}
                   </span>
-                  <h3 className="mt-5 font-sans text-[15px] font-bold uppercase tracking-[0.18em] text-foreground md:text-[17px]">
+                  <h3 className="mt-5 font-serif text-[15px] font-bold uppercase tracking-[0.18em] text-foreground md:text-[17px]">
                     {p.title}
                   </h3>
                   <span className="mt-3 h-[1px] w-10 origin-left bg-gold/50 transition-all duration-500 group-hover:w-16 group-hover:bg-gold" />

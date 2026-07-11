@@ -144,17 +144,17 @@ function TeamCard({ person, index }: { person: TeamMember, index: number }) {
         />
       </div>
       <div className="flex flex-col items-center text-center px-1">
-        <h4 className="text-foreground text-[16px] md:text-[18px] lg:text-[22px] font-medium tracking-[0.05em] transition-all duration-500 ease-out whitespace-nowrap">
+        <h4 className="text-foreground font-serif text-[16px] md:text-[18px] lg:text-[22px] font-medium tracking-[0.05em] transition-all duration-500 ease-out whitespace-nowrap">
           {person.name}
         </h4>
-        <span className="text-foreground/90 text-[14px] md:text-[16px] mt-1.5 font-light">
+        <span className="text-foreground/90 font-serif text-[14px] md:text-[16px] mt-1.5 font-light">
           {person.role}
         </span>
-        <span className="text-foreground/90 text-[14px] md:text-[16px] mt-1 font-light">
+        <span className="text-foreground/90 font-serif text-[14px] md:text-[16px] mt-1 font-light">
           {person.department}
         </span>
         {person.mobile && (
-          <span className="text-foreground/90 text-[14px] md:text-[16px] mt-2 font-light">
+          <span className="text-foreground/90 font-serif text-[14px] md:text-[16px] mt-2 font-light">
             Mobile: {person.mobile}
           </span>
         )}
