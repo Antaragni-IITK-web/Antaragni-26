@@ -139,7 +139,7 @@ export function HeroAct() {
             split="lines"
             stagger={0.14}
             delay={1.1}
-            className="font-serif text-[clamp(1.4rem,3.75vw,3.4rem)] font-semibold uppercase leading-[1.12] tracking-[0.1em] text-foreground"
+            className="font-sans text-[clamp(1.4rem,3.75vw,3.4rem)] font-semibold uppercase leading-[1.12] tracking-[0.1em] text-foreground"
           />
           <motion.p
             initial={{ opacity: 0, y: 14 }}
