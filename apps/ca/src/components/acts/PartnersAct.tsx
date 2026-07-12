@@ -13,25 +13,27 @@ const TIERS: { id: string; heading: string; partners: Partner[] }[] = [
     id: "title",
     heading: "Title Partners",
     partners: [
-      { id: "intrcity", src: assets.sponsors.intrcity, name: "Intrcity" },
-      { id: "vskills", src: assets.sponsors.vskills, name: "vSkills" },
+      { id: "finlatics", src: assets.sponsors.finlatics, name: "Finlatics" },
     ],
   },
   {
     id: "goodies",
     heading: "Goodies Partners",
     partners: [
-      { id: "swashaa", src: assets.sponsors.swashaa, name: "Swashaa" },
-      { id: "urbanDrift", src: assets.sponsors.urbanDrift, name: "Urban Drift" },
-      { id: "supervek", src: assets.sponsors.supervek, name: "Supervek" },
+      { id: "wrapcart", src: assets.sponsors.wrapcart, name: "Wrapcart" },
+      { id: "soxytoes", src: assets.sponsors.soxytoes, name: "Soxytoes" },
+      { id: "drewknot", src: assets.sponsors.drewknot, name: "Drewknot" },
     ],
   },
   {
     id: "outreach",
     heading: "Outreach Partners",
     partners: [
-      { id: "easyShiksha", src: assets.sponsors.easyShiksha, name: "EasyShiksha" },
+      { id: "oaHelper", src: assets.sponsors.oaHelper, name: "OAHelper – Nxtwave" },
       { id: "productFolks", src: assets.sponsors.productFolks, name: "The Product Folks" },
+      { id: "nisarg", src: assets.sponsors.nisarg, name: "Nisarg Srishti Welfare Foundation" },
+      { id: "guvi", src: assets.sponsors.guvi, name: "GUVI" },
+      { id: "doremonDen", src: assets.sponsors.doremonDen, name: "Doremon Den" },
     ],
   },
 ];
@@ -65,7 +67,7 @@ export function PartnersAct() {
             <h3 className="text-center font-serif text-[16px] font-semibold uppercase tracking-[0.4em] text-accent md:text-[17px]">
               {tier.heading}
             </h3>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:mt-12 lg:gap-24 xl:gap-36">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:mt-12 lg:gap-20">
               {tier.partners.map((p) => (
                 <LogoCard key={p.id} src={p.src} name={p.name} />
               ))}
