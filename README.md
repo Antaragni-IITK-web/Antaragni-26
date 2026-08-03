@@ -1,58 +1,66 @@
-# Turborepo Tailwind CSS starter
+# Antaragni '26
 
-This Turborepo starter is maintained by the Turborepo core team.
+Monorepo for the web properties of **Antaragni**, the annual cultural festival of
+IIT Kanpur — North India's largest, running since 1965.
 
-## Using this example
+## What's inside
 
-Run the following commands:
+A [Turborepo](https://turborepo.com/) with npm workspaces.
+
+### Apps
+
+- **`ca`** — the Campus Ambassador site: landing page, Google-auth registration,
+  and the ambassador dashboard (profile, leaderboard, missions).
+- `antaragni_main`, `events-registration`, `web`, `docs` — reserved workspaces.
+
+### Packages
+
+- `@repo/ui` — shared React components and the Lenis smooth-scroll provider
+- `@repo/firebase` — Firebase auth, Firestore and storage helpers
+- `@repo/store` — global Zustand store
+- `@repo/model` — shared TypeScript types
+- `@repo/math` — small shared utilities
+- `@repo/eslint-config`, `@repo/typescript-config`, `@repo/tailwind-config` — shared configs
+
+Everything is TypeScript.
+
+## Getting started
 
 ```sh
-npx create-turbo@latest -e with-tailwind
+npm install --legacy-peer-deps
 ```
 
-## What's inside?
+> The `--legacy-peer-deps` flag is required: `@gsap/react`'s peer range trips
+> strict resolution. React is pinned to **18.3.1** across the monorepo via root
+> `overrides` — mixing in React 19 breaks rendering, so keep the pin in place.
 
-This Turborepo includes the following packages/apps:
+Run the Campus Ambassador app:
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Building packages/ui
-
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.ts`. This was chosen for several reasons:
-
-- Make sharing one `tailwind.config.ts` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
-
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.ts` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
-
-For example, in [tailwind.config.ts](packages/tailwind-config/tailwind.config.ts):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
+```sh
+npm run dev --workspace=ca
 ```
 
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
+Each app needs its own `.env.local` with Firebase credentials (never commit these).
 
-### Utilities
+## Common tasks
 
-This Turborepo has some additional tools already setup for you:
+```sh
+npm run build          # build all workspaces
+npm run lint           # lint all workspaces
+npm run check-types    # typecheck all workspaces
+npm run format         # prettier
+```
 
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## The `ca` app
+
+Next.js App Router, Tailwind CSS, Framer Motion, Lenis.
+
+- `src/app` — routes, layout, metadata and icon/OG image generation
+- `src/components/acts` — the landing page, told in five sections (hero → legacy →
+  the role → journey → rewards → partners → final CTA)
+- `src/components/motion` — reusable motion primitives (mask-reveal text, count-up,
+  ambient background, magnetic buttons, cinematic atmosphere)
+- `src/components/dashboard` — the ambassador dashboard tabs
+- `src/lib/assets.ts` — single registry for every static asset path
+
+Note: avoid `runtime = "edge"` in this app — it corrupts the Turbopack dev build.
