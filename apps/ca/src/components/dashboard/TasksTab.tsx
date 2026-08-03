@@ -60,7 +60,9 @@ export function TasksTab() {
         setTasks(fetchedTasks);
       }
     } catch (error) {
-      toast.error(`${error}`);
+      // [SECURITY] Do not expose raw Firebase error to user
+      console.error("Tasks fetch error:", error);
+      toast.error("Could not load tasks. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -136,7 +138,7 @@ export function TasksTab() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="text-lg font-sans font-bold text-white mb-4">Submit Proof</h3>
+            <h3 className="text-lg font-serif font-bold text-white mb-4">Submit Proof</h3>
             <p className="text-sm text-white/60 mb-4 line-clamp-2">{currentTask.desc}</p>
             <div className="flex flex-col gap-2 mb-6">
               <label htmlFor="link" className="text-xs font-sans font-semibold tracking-wider text-white/40 uppercase">
@@ -153,7 +155,7 @@ export function TasksTab() {
             </div>
             <button
               onClick={() => submit(currentTask)}
-              className="w-full py-2.5 bg-accent hover:bg-red-600 text-[12px] font-sans font-bold uppercase tracking-wider text-white rounded-md transition-colors duration-200"
+              className="w-full py-2.5 bg-accent hover:bg-red-600 text-[12px] font-serif font-bold uppercase tracking-wider text-white rounded-md transition-colors duration-200"
             >
               SUBMIT
             </button>

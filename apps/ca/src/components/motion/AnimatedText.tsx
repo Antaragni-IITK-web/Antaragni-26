@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -52,7 +53,9 @@ export function AnimatedText({
     },
   };
 
-  const MotionComp = motion(Component as any);
+  // motion.create replaces the deprecated motion() factory; memoized so a new
+  // component type isn't created every render (which would remount the subtree)
+  const MotionComp = useMemo(() => motion.create(Component as any), [Component]);
 
   return (
     <MotionComp

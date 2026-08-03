@@ -95,7 +95,7 @@ export function MagneticButton({
           }}
         />
       )}
-      <span className="relative z-10 text-[10px] font-semibold uppercase tracking-[0.35em] text-foreground transition-all duration-400 group-hover:tracking-[0.42em] md:text-[11px] lg:text-xs">
+      <span className="relative z-10 font-serif text-[10px] font-semibold uppercase tracking-[0.35em] text-foreground transition-all duration-400 group-hover:tracking-[0.42em] md:text-[11px] lg:text-xs">
         {children}
       </span>
     </span>

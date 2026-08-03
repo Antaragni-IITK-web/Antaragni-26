@@ -7,7 +7,7 @@ export function EditorialSubheading({
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={cn("font-sans font-medium text-[24px] leading-[1.3] tracking-[0.05em] uppercase", className)}
+      className={cn("font-serif font-medium text-[24px] leading-[1.3] tracking-[0.06em] uppercase", className)}
       {...props}
     >
       {children}

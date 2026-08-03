@@ -128,24 +128,24 @@ export function HeroAct() {
             stagger={0.05}
             delay={0.45}
             duration={1.1}
-            className="block whitespace-nowrap text-[clamp(3rem,11vw,10rem)] -tracking-[0.01em]"
+            className="block whitespace-nowrap text-[clamp(3rem,11vw,10rem)] -tracking-[0.02em]"
           />
         </h1>
 
-        {/* the promise */}
-        <div className="mt-6 max-w-[620px] md:mt-9">
+        {/* the promise — co-headline under the wordmark */}
+        <div className="mt-4 max-w-[900px] md:mt-5">
           <AnimatedText
-            text={["THE STAGE IS BIGGER", "THAN YOU IMAGINE."]}
+            text={["CAMPUS AMBASSADOR", "PROGRAM"]}
             split="lines"
             stagger={0.14}
             delay={1.1}
-            className="font-sans text-[clamp(1.15rem,2.6vw,1.9rem)] font-bold uppercase leading-[1.25] tracking-[0.12em] text-foreground"
+            className="font-sans text-[clamp(1.4rem,3.75vw,3.4rem)] font-semibold uppercase leading-[1.12] tracking-[0.1em] text-foreground"
           />
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6, ease: EASE }}
-            className="mt-5 max-w-[480px] text-[13px] leading-[1.9] text-muted md:text-[15px]"
+            className="mt-6 max-w-[480px] font-serif text-[13px] leading-[1.9] text-muted md:mt-8 md:text-[15px]"
           >
             Become the face of North India&apos;s largest cultural festival.
             Lead your campus. Wear the flame.{" "}

@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect, RefObject } from "react";
+import { useEffect, useRef, RefObject } from "react";
 import { useEditorState } from "./useEditorState";
 import { defaultTransform } from "@/config/incentives-layout";
 
 export function useDraggable(id: string, ref: RefObject<HTMLElement | null>) {
   const { isEditorActive, mode, layout, updateTransform, setSelectedId } = useEditorState();
+
+  // Read layout through a ref so it isn't an effect dependency — otherwise every
+  // updateTransform during a drag re-runs the effect, removing the pointer
+  // listeners and resetting isDragging, which froze the drag after one move.
+  const layoutRef = useRef(layout);
+  layoutRef.current = layout;
 
   useEffect(() => {
     const el = ref.current;
@@ -31,7 +37,7 @@ export function useDraggable(id: string, ref: RefObject<HTMLElement | null>) {
         startX = e.clientX;
         startY = e.clientY;
 
-        const currentTransform = layout[id] || defaultTransform;
+        const currentTransform = layoutRef.current[id] || defaultTransform;
         initialTx = currentTransform.x;
         initialTy = currentTransform.y;
 
@@ -69,5 +75,5 @@ export function useDraggable(id: string, ref: RefObject<HTMLElement | null>) {
       el.removeEventListener("pointerup", handlePointerUp);
       el.removeEventListener("pointercancel", handlePointerUp);
     };
-  }, [isEditorActive, mode, id, layout, updateTransform, setSelectedId, ref]);
+  }, [isEditorActive, mode, id, updateTransform, setSelectedId, ref]);
 }

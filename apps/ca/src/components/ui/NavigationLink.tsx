@@ -11,7 +11,7 @@ export function NavigationLink({ href, active, className, children, ...props }: 
     <Link
       href={href}
       className={cn(
-        "group relative inline-flex items-center font-sans font-medium text-[12px] uppercase tracking-[0.05em] text-muted hover:text-accent transition-colors duration-300",
+        "group relative inline-flex items-center font-serif font-medium text-[12px] uppercase tracking-[0.08em] text-muted hover:text-accent transition-colors duration-300",
         active && "text-foreground",
         className
       )}

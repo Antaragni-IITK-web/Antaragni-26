@@ -213,7 +213,7 @@ export function IdeasTab() {
             id="idea-submit-btn"
             type="submit"
             disabled={isSubmitting}
-            className="flex items-center gap-3 px-7 py-3 bg-accent hover:bg-red-600 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed text-[10px] font-sans font-bold uppercase tracking-[0.22em] text-white rounded-lg transition-all duration-200 shadow-lg shadow-accent/15"
+            className="flex items-center gap-3 px-7 py-3 bg-accent hover:bg-red-600 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed text-[10px] font-serif font-bold uppercase tracking-[0.22em] text-white rounded-lg transition-all duration-200 shadow-lg shadow-accent/15"
           >
             {isSubmitting ? (
               <>

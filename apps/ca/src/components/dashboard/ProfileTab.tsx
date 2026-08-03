@@ -131,7 +131,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 CA ID
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 truncate" title={data.id}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 truncate" title={data.id}>
                 {data.id}
               </span>
             </div>
@@ -148,7 +148,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 Full Name
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 truncate" title={data.name}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 truncate" title={data.name}>
                 {data.name}
               </span>
             </div>
@@ -168,7 +168,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 Email ID
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 truncate" title={data.email}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 truncate" title={data.email}>
                 {data.email}
               </span>
             </div>
@@ -185,7 +185,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 Mobile Number
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 truncate" title={data.phone}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 truncate" title={data.phone}>
                 {data.phone}
               </span>
             </div>
@@ -205,7 +205,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 WhatsApp Number
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 truncate" title={data.whatsapp}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 truncate" title={data.whatsapp}>
                 {data.whatsapp}
               </span>
             </div>
@@ -222,7 +222,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 College / University
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 truncate" title={data.college}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 truncate" title={data.college}>
                 {data.college}
               </span>
             </div>
@@ -243,7 +243,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 College City
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 truncate" title={data.collegeCity}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 truncate" title={data.collegeCity}>
                 {data.collegeCity}
               </span>
             </div>
@@ -260,7 +260,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 Year of Study
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 truncate" title={data.year}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 truncate" title={data.year}>
                 {data.year}
               </span>
             </div>
@@ -281,7 +281,7 @@ export function ProfileTab() {
               <span className="text-[10px] font-sans font-semibold tracking-widest text-white/40 uppercase leading-none">
                 Postal Address
               </span>
-              <span className="text-[14px] md:text-[15px] font-sans font-medium text-white mt-1.5 leading-relaxed break-words" title={data.address}>
+              <span className="text-[14px] md:text-[15px] font-serif font-medium text-white mt-1.5 leading-relaxed break-words" title={data.address}>
                 {data.address}
               </span>
             </div>

@@ -17,14 +17,14 @@ interface SubFAQProps {
 const SubFAQItem = ({ qNumber, question, answer }: SubFAQProps) => (
   <div className="flex flex-col md:flex-row gap-6 md:gap-12 w-full">
     <div className="flex-1 flex flex-col gap-4">
-      <span className="text-accent text-[12px] font-sans font-bold">{qNumber}</span>
-      <h4 className="text-[18px] md:text-[22px] font-sans font-medium text-foreground pr-8">
+      <span className="text-accent text-[12px] font-serif font-bold">{qNumber}</span>
+      <h4 className="text-[18px] md:text-[22px] font-serif font-medium text-foreground pr-8">
         {question}
       </h4>
     </div>
     <div className="hidden md:block w-[1px] bg-white/10" />
     <div className="flex-[1.5] flex items-center">
-      <p className="text-muted text-[13px] md:text-[15px] leading-[1.8] font-sans">
+      <p className="text-muted text-[13px] md:text-[15px] leading-[1.8] font-serif">
         {answer}
       </p>
     </div>
@@ -256,7 +256,7 @@ export function FAQSection() {
                   {/* Description & Icon container */}
                   <div className="flex-1 flex flex-row items-center justify-between gap-8 md:gap-16 w-full md:w-auto">
                     <p className={cn(
-                      "text-[12px] md:text-[14px] font-sans leading-[1.6] transition-colors duration-500 max-w-[300px]",
+                      "text-[12px] md:text-[14px] font-serif leading-[1.6] transition-colors duration-500 max-w-[300px]",
                       isExpanded ? "text-white/80" : "text-muted group-hover:text-white/60"
                     )}>
                       {item.description}

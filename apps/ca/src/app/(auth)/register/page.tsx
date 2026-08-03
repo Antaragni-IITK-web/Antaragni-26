@@ -57,14 +57,17 @@ export default function Login() {
 	const awardPoint = async () => {
 		try {
 			const rawUsers = await queryData("CAs26", "id", referrer);
-			if (rawUsers.length > 0) {
-				const user = rawUsers[0];
-				let points = user?.data.points;
-				points += 10;
-				await updateData("CAs26", user!.uid, { points: points });
+			// [SECURITY] A user must not be able to award referral points to themselves
+			if (rawUsers.length > 0 && rawUsers[0]?.uid !== user?.user.uid) {
+				const referrerDoc = rawUsers[0];
+				// Guard against a missing/non-numeric points field writing NaN to Firestore
+				const currentPoints = typeof referrerDoc?.data.points === "number" ? referrerDoc.data.points : 0;
+				await updateData("CAs26", referrerDoc!.uid, { points: currentPoints + 10 });
 			}
 		} catch (error) {
-			toast.error(`${error}`);
+			// [SECURITY] Do not expose raw Firebase error to user
+			console.error("Referral award error:", error);
+			toast.error("Could not award referral points.");
 		}
 	};
 
@@ -327,7 +330,7 @@ export default function Login() {
 						</LabelInputContainer>
 					</form>
 						<button 
-							className="mt-6 bg-accent hover:bg-red-600 text-white px-8 py-3 rounded-full font-sans font-medium uppercase tracking-[0.12em] transition-all duration-300" 
+							className="mt-6 bg-accent hover:bg-red-600 text-white px-8 py-3 rounded-full font-serif font-medium uppercase tracking-[0.12em] transition-all duration-300" 
 							onClick={register}
 						>
 							Register &rarr;
