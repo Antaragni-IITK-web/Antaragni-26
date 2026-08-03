@@ -20,13 +20,13 @@ interface TeamMember {
   image_path: string;
 }
 
-// Initial fallback data
+// Initial fallback data — alphabetical order
 const teamData: TeamMember[] = [
-  { name: "Ish Upadhyay", role: "Organiser", department: "Hospitality and Transport", mobile: "9826889204", email: "ishupadhyay8259@gmail.com", instagram: "https://www.instagram.com/better_call_ish?igsh=MWxlYjQ3dTBkaHpnaA%3D%3D&utm_source=qr", linkedin: "https://www.linkedin.com/in/ish-upadhyay-9404a1360?utm_source=share_via&utm_content=profile&utm_medium=member_ios", image_path: assets.contact.ish },
+  { name: "Ankit", role: "Organiser", department: "Hospitality and Transport", mobile: "8130789405", email: "ankitp24@iitk.ac.in", instagram: "https://www.instagram.com/ankit_iitk28?igsh=MXBzYnYyYzkzZ3pzMg==", linkedin: "https://www.linkedin.com/in/ankit-263152322?utm_source=share_via&utm_content=profile&utm_medium=member_android", image_path: assets.contact.ankit },
   { name: "Deepanshu Kashyap", role: "Organizer", department: "Hospitality and Transport", mobile: "8384029673", email: "dkris3348@gmail.com", instagram: "https://www.instagram.com/idk_deepksp?igsh=MWYxOTFsaWhkbXE0bg==", linkedin: "www.linkedin.com/in/deepanshu-kashyap-hr05", image_path: assets.contact.deepanshu },
   { name: "Dhruv Garg", role: "Organiser", department: "Hospitality and Transport", mobile: "8690168344", email: "dhruvg24@iitk.ac.in", instagram: "https://www.instagram.com/_hruvgarg?igsh=MWNmY2pqZWFkazJ4Zg==", linkedin: "", image_path: assets.contact.dhruv },
+  { name: "Ish Upadhyay", role: "Organiser", department: "Hospitality and Transport", mobile: "9826889204", email: "ishupadhyay8259@gmail.com", instagram: "https://www.instagram.com/better_call_ish?igsh=MWxlYjQ3dTBkaHpnaA%3D%3D&utm_source=qr", linkedin: "https://www.linkedin.com/in/ish-upadhyay-9404a1360?utm_source=share_via&utm_content=profile&utm_medium=member_ios", image_path: assets.contact.ish },
   { name: "Rhythm Soan", role: "Organiser", department: "Hospitality and Transport", mobile: "9875897824", email: "rhhythmsoan01@gmail.com", instagram: "https://www.instagram.com/yrrrhythm._.s/?utm_source=ig_web_button_share_sheet", linkedin: "", image_path: assets.contact.rhythm },
-  { name: "Madhur Kumar", role: "Organiser", department: "Hospitality and Transport", mobile: "8368527779", email: "madhurkumar8368@gmail.com", instagram: "https://www.instagram.com/madhur_47/", linkedin: "https://www.linkedin.com/in/madhur-kumar-a00763287", image_path: assets.contact.madhur }
 ];
 
 // No spring effects, pure cinematic ease

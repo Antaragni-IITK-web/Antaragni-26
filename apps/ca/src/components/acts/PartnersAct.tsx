@@ -7,19 +7,49 @@ import { assets } from "@/lib/assets";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const PARTNERS = [
-  { id: "intrcity", src: assets.sponsors.intrcity, name: "Intrcity" },
-  { id: "vskills", src: assets.sponsors.vskills, name: "vSkills" },
-  { id: "easyShiksha", src: assets.sponsors.easyShiksha, name: "EasyShiksha" },
-  { id: "swashaa", src: assets.sponsors.swashaa, name: "Swashaa" },
-  { id: "urbanDrift", src: assets.sponsors.urbanDrift, name: "Urban Drift" },
-  { id: "productFolks", src: assets.sponsors.productFolks, name: "The Product Folks" },
-  { id: "supervek", src: assets.sponsors.supervek, name: "Supervek" },
+const SPONSOR_GROUPS = [
+  {
+    title: "TITLE PARTNERS",
+    logos: [
+      { id: "finlatics", src: assets.sponsors.finlatics, name: "Finlatics" },
+    ],
+  },
+  {
+    title: "GOODIES PARTNERS",
+    logos: [
+      { id: "wrapcart", src: assets.sponsors.wrapcart, name: "Wrapcart" },
+      { id: "soxytoes", src: assets.sponsors.soxytoes, name: "Soxytoes" },
+      { id: "drewknot", src: assets.sponsors.drewknot, name: "Drewknot" },
+    ],
+  },
+  {
+    title: "OUTREACH PARTNERS",
+    logos: [
+      { id: "oaHelper", src: assets.sponsors.oaHelper, name: "OAHelper – Nxtwave" },
+      { id: "productFolks", src: assets.sponsors.productFolks, name: "The Product Folks" },
+      { id: "nisarg", src: assets.sponsors.nisarg, name: "Nisarg Srishti Welfare Foundation" },
+      { id: "guvi", src: assets.sponsors.guvi, name: "GUVI" },
+      { id: "doremonDen", src: assets.sponsors.doremonDen, name: "Doremon Den" },
+    ],
+  },
 ];
+
+const chipVariant = {
+  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: EASE },
+  },
+};
 
 function LogoChip({ src, name }: { src: string; name: string }) {
   return (
-    <div className="group relative mx-3 flex h-[92px] w-[170px] shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.025] transition-colors duration-500 hover:border-gold/40 md:mx-4 md:h-[108px] md:w-[210px]">
+    <motion.div
+      variants={chipVariant}
+      className="group relative flex h-[150px] w-[180px] items-center justify-center overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.025] transition-colors duration-500 hover:border-gold/40 md:h-[190px] md:w-[230px]"
+    >
       <span
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
@@ -27,29 +57,31 @@ function LogoChip({ src, name }: { src: string; name: string }) {
         }}
       />
       {/* white logo plate — sponsor marks come on white grounds */}
-      <div className="relative flex h-[68%] w-[78%] items-center justify-center overflow-hidden rounded-md bg-[#eae7e1] shadow-[0_8px_22px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:scale-[1.04] group-hover:bg-white">
-        <div className="relative h-[78%] w-[84%] grayscale transition-all duration-500 group-hover:grayscale-0">
-          <Image src={src} alt={name} fill className="object-contain" sizes="210px" />
+      <div className="relative flex h-[76%] w-[82%] items-center justify-center overflow-hidden rounded-md bg-[#eae7e1] shadow-[0_8px_22px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:scale-[1.04] group-hover:bg-white">
+        <div className="relative h-[82%] w-[86%] grayscale transition-all duration-500 group-hover:grayscale-0">
+          <Image src={src} alt={name} fill className="object-contain" sizes="230px" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 /**
  * ACT III·c — PARTNERS BEHIND THE LEGACY
- * Credibility wall: infinite marquee of partner marks.
+ * Credibility wall: centre-aligned grid of partner marks, grouped by category.
  */
 export function PartnersAct() {
   return (
     <section id="sponsors" className="act border-t border-white/[0.05] bg-surface py-24 md:py-32">
-      <div className="relative z-10 mx-auto mb-12 flex w-full max-w-[1440px] flex-col items-start justify-between gap-6 px-6 md:mb-16 md:flex-row md:items-end md:px-10 lg:px-20">
-        <div className="flex flex-col gap-4">
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-20">
+        {/* header — centred */}
+        <div className="mb-14 flex flex-col items-center gap-4 text-center md:mb-20">
           <div className="flex items-center gap-3">
             <span className="h-[1px] w-8 bg-gold" />
             <span className="text-[10px] font-semibold uppercase tracking-[0.32em] text-gold">
               Our Partners
             </span>
+            <span className="h-[1px] w-8 bg-gold" />
           </div>
           <h2 className="font-serif uppercase leading-[0.95] text-foreground">
             <AnimatedText
@@ -66,41 +98,49 @@ export function PartnersAct() {
               className="block text-[clamp(2rem,5vw,4rem)] text-gold-shimmer"
             />
           </h2>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
+            className="text-[11px] uppercase leading-[2] tracking-[0.2em] text-muted"
+          >
+            Trusted by brands <span className="text-foreground">who power experiences.</span>
+          </motion.p>
         </div>
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
-          className="max-w-[300px] text-[11px] uppercase leading-[2] tracking-[0.2em] text-muted md:text-right"
-        >
-          Trusted by brands
-          <br />
-          <span className="text-foreground">who power experiences.</span>
-        </motion.p>
-      </div>
 
-      {/* marquee row 1 */}
-      <div className="marquee-mask w-full overflow-hidden py-3">
-        <div className="marquee-track" style={{ "--marquee-duration": "38s" } as React.CSSProperties}>
-          {[0, 1].map((half) => (
-            <div key={half} className="flex shrink-0" aria-hidden={half === 1}>
-              {PARTNERS.map((p) => (
-                <LogoChip key={`${half}-${p.id}`} src={p.src} name={p.name} />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* marquee row 2 — reverse drift */}
-      <div className="marquee-mask w-full overflow-hidden py-3" style={{ direction: "rtl" }}>
-        <div className="marquee-track" style={{ "--marquee-duration": "46s" } as React.CSSProperties}>
-          {[0, 1].map((half) => (
-            <div key={half} className="flex shrink-0" aria-hidden={half === 1}>
-              {[...PARTNERS].reverse().map((p) => (
-                <LogoChip key={`${half}-${p.id}`} src={p.src} name={p.name} />
-              ))}
-            </div>
+        {/* centred category grid */}
+        <div className="flex flex-col gap-14 md:gap-16">
+          {SPONSOR_GROUPS.map((group) => (
+            <motion.div
+              key={group.title}
+              className="flex flex-col items-center"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={{ visible: { transition: { staggerChildren: 0.09 } } }}
+            >
+              {/* category label */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, letterSpacing: "0.4em" },
+                  visible: {
+                    opacity: 1,
+                    letterSpacing: "0.26em",
+                    transition: { duration: 1, ease: EASE },
+                  },
+                }}
+                className="mb-7 text-[10px] font-semibold uppercase text-gold md:text-[11px]"
+              >
+                {group.title}
+              </motion.div>
+
+              <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7">
+                {group.logos.map((sponsor) => (
+                  <LogoChip key={sponsor.id} src={sponsor.src} name={sponsor.name} />
+                ))}
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
