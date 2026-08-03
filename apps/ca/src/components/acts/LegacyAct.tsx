@@ -44,7 +44,7 @@ export function LegacyAct() {
   const crowdScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.02, 1.15]);
 
   return (
-    <section id="legacy" className="act border-t border-white/[0.05] bg-background py-24 md:py-36">
+    <section id="legacy" className="act border-t border-white/[0.05] py-24 md:py-36">
       <CinematicAtmosphere tone="ember" intensity={0.6} spotlight={false} />
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-20">

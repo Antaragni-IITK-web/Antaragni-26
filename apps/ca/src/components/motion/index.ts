@@ -1,3 +1,4 @@
+export { AmbientBackground } from "./AmbientBackground";
 export { AnimatedText } from "./AnimatedText";
 export { CountUp } from "./CountUp";
 export { CinematicAtmosphere } from "./CinematicAtmosphere";

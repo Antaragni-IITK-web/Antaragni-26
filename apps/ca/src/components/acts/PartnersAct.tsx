@@ -72,7 +72,7 @@ function LogoChip({ src, name }: { src: string; name: string }) {
  */
 export function PartnersAct() {
   return (
-    <section id="sponsors" className="act border-t border-white/[0.05] bg-surface py-24 md:py-32">
+    <section id="sponsors" className="act border-t border-white/[0.05] bg-surface/60 py-24 md:py-32">
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-20">
         {/* header — centred */}
         <div className="mb-14 flex flex-col items-center gap-4 text-center md:mb-20">

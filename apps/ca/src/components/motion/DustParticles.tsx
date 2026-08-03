@@ -6,8 +6,8 @@ interface DustParticlesProps {
   /** particle count per 10,000 px² — keep tiny */
   density?: number;
   className?: string;
-  /** warm gold motes vs neutral white */
-  tone?: "gold" | "neutral";
+  /** warm gold motes, neutral white, or mixed fire embers */
+  tone?: "gold" | "neutral" | "fire";
 }
 
 /**
@@ -30,7 +30,10 @@ export function DustParticles({ density = 0.16, className, tone = "gold" }: Dust
     let w = 0;
     let h = 0;
 
-    type P = { x: number; y: number; r: number; vx: number; vy: number; a: number; tw: number };
+    // fire embers mix three warm hues; other tones are uniform
+    const FIRE_RGBS = ["236,200,121", "255,107,53", "217,80,48"];
+
+    type P = { x: number; y: number; r: number; vx: number; vy: number; a: number; tw: number; rgb: string };
     let particles: P[] = [];
 
     const seed = () => {
@@ -38,11 +41,17 @@ export function DustParticles({ density = 0.16, className, tone = "gold" }: Dust
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        r: 0.5 + Math.random() * 1.7,
+        r: 0.5 + Math.random() * (tone === "fire" ? 1.4 : 1.7),
         vx: (Math.random() - 0.5) * 0.16,
-        vy: -(0.04 + Math.random() * 0.14),
+        vy: -(0.04 + Math.random() * (tone === "fire" ? 0.22 : 0.14)),
         a: 0.04 + Math.random() * 0.22,
         tw: Math.random() * Math.PI * 2,
+        rgb:
+          tone === "fire"
+            ? FIRE_RGBS[Math.floor(Math.random() * FIRE_RGBS.length)]!
+            : tone === "gold"
+              ? "236,200,121"
+              : "244,239,230",
       }));
     };
 
@@ -57,8 +66,6 @@ export function DustParticles({ density = 0.16, className, tone = "gold" }: Dust
       seed();
     };
 
-    const rgb = tone === "gold" ? "236,200,121" : "244,239,230";
-
     const frame = (t: number) => {
       if (!running) return;
       ctx.clearRect(0, 0, w, h);
@@ -71,7 +78,7 @@ export function DustParticles({ density = 0.16, className, tone = "gold" }: Dust
         const twinkle = 0.65 + 0.35 * Math.sin(t / 900 + p.tw);
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${rgb},${(p.a * twinkle).toFixed(3)})`;
+        ctx.fillStyle = `rgba(${p.rgb},${(p.a * twinkle).toFixed(3)})`;
         ctx.fill();
       }
       raf = requestAnimationFrame(frame);

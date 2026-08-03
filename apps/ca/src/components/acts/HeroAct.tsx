@@ -45,7 +45,7 @@ export function HeroAct() {
   };
 
   return (
-    <section id="home" className="act flex min-h-[100svh] flex-col bg-background">
+    <section id="home" className="act flex min-h-[100svh] flex-col">
       {/* ── Stage atmosphere ── */}
       <CinematicAtmosphere tone="amber" intensity={0.9} />
 

@@ -38,7 +38,7 @@ const PILLARS = [
  */
 export function WhyAct() {
   return (
-    <section id="why" className="act border-t border-white/[0.05] bg-surface py-24 md:py-36">
+    <section id="why" className="act border-t border-white/[0.05] bg-surface/60 py-24 md:py-36">
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-20">
         <div className="mb-14 flex flex-col gap-4 md:mb-20">
           <div className="flex items-center gap-3">

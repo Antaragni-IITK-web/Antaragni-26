@@ -166,7 +166,7 @@ export function FAQSection() {
   };
 
   return (
-    <section id="faq" className="relative w-full flex flex-col pt-24 pb-32 bg-black overflow-hidden border-t border-white/5">
+    <section id="faq" className="relative w-full flex flex-col pt-24 pb-32 bg-black/50 overflow-hidden border-t border-white/5">
       {/* Background Volumetric Spotlight */}
       <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] opacity-[0.25] pointer-events-none mix-blend-screen origin-top-left rotate-[-15deg]">
         <Image src={assets.textures.spotlight} alt="spotlight" fill className="object-contain" priority />

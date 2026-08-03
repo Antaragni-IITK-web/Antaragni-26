@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { InitialState } from "@/components/shared/InitialState";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { AmbientBackground } from "@/components/motion/AmbientBackground";
 import { Toaster } from "react-hot-toast";
 
 // Libre Bodoni — sharp, high-contrast Didone with strong vertical stress.
@@ -74,6 +75,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${libreBodoni.variable} font-sans bg-background text-foreground antialiased`}>
         <InitialState document="CAs26" />
+        <AmbientBackground />
         <SmoothScroll />
         <Toaster />
         <Navbar />

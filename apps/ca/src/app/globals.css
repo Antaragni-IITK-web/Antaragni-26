@@ -90,6 +90,14 @@ body {
   100% { transform: translateX(-50%); }
 }
 
+/* Ambient wash-light drift — large blurred pools roaming slowly */
+@keyframes wash-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(6vw, -4vh, 0) scale(1.12); }
+  66%  { transform: translate3d(-4vw, 3vh, 0) scale(0.94); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
 /* Scroll cue line drop */
 @keyframes cue-drop {
   0%   { transform: translateY(-100%); }

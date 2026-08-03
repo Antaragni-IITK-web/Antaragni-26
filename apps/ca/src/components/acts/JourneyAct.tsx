@@ -47,7 +47,7 @@ export function JourneyAct() {
   const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="journey" className="act border-t border-white/[0.05] bg-background py-24 md:py-36">
+    <section id="journey" className="act border-t border-white/[0.05] py-24 md:py-36">
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-20">
         <div className="mb-16 flex flex-col gap-4 md:mb-24">
           <div className="flex items-center gap-3">
