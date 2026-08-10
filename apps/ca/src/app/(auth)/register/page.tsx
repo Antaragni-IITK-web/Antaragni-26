@@ -365,7 +365,7 @@ export default function Login() {
 							Join WhatsApp Group
 						</a>
 						
-						<p className="text-white text-xl font-medium mb-8">See you there! 🙌</p>
+						<p className="text-white text-xl font-medium mb-8">See you there!</p>
 						
 						<button 
 							onClick={() => router.push("/dashboard")}
