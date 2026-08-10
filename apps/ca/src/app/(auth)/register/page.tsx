@@ -28,15 +28,17 @@ export default function Login() {
 
 	const router = useRouter()
 
+	const [showPopup, setShowPopup] = useState<boolean>(false);
+
 	useEffect(() => {
 		if (!loading) {
 			if (!user) {
 				router.push("/");
-			} else if (user.details) {
+			} else if (user.details && !showPopup) {
 				router.push("/dashboard");
 			}
 		}
-	}, [user, loading, router]);
+	}, [user, loading, router, showPopup]);
 
 	const [name, setName] = useState<string>(
 		user?.user.displayName?.toUpperCase() || ""
@@ -125,7 +127,7 @@ export default function Login() {
 					return;
 				}
 				setUser({ user: user!.user, details: UserData });
-				router.push("/dashboard")
+				setShowPopup(true);
 				toast.success("Registered Successfully!")
 				if (referrer !== "") {
 					awardPoint();
@@ -337,6 +339,43 @@ export default function Login() {
 						</button>
 				</div>
 			</Section>
+			
+			{showPopup && (
+				<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+					<div className="bg-[#111] border border-white/10 p-8 md:p-10 rounded-3xl max-w-lg w-full shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+						{/* Background decorative elements */}
+						<div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-70"></div>
+						<div className="absolute -top-24 -right-24 w-48 h-48 bg-red-500/20 rounded-full blur-3xl"></div>
+						
+						<h2 className="text-3xl font-bold text-white mb-6 tracking-wide">Thank you for registering!</h2>
+						
+						<p className="text-gray-300 mb-8 text-base md:text-lg leading-relaxed max-w-sm">
+							We’re excited to have you join us. To stay connected and receive important updates, announcements, and further information, please join the following WhatsApp group:
+						</p>
+						
+						<a 
+							href="https://chat.whatsapp.com/IIdxnJo4294KhK57h9EM4l?s=cl&p=a&ilr=1" 
+							target="_blank" 
+							rel="noopener noreferrer"
+							className="group relative inline-flex items-center justify-center gap-3 bg-red-500 hover:bg-red-400 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 mb-8 w-full sm:w-auto shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] hover:-translate-y-1"
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-circle">
+								<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+							</svg>
+							Join WhatsApp Group
+						</a>
+						
+						<p className="text-white text-xl font-medium mb-8">See you there! 🙌</p>
+						
+						<button 
+							onClick={() => router.push("/dashboard")}
+							className="text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-6 py-2 rounded-full text-sm font-medium transition-colors"
+						>
+							Continue to Dashboard
+						</button>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
