@@ -260,17 +260,15 @@ export function TasksTab() {
                     {task.deadline ? getDate(task.deadline).toString() : "No Deadline"}
                   </span>
 
-                  {!submitted && (
-                    <button
-                      onClick={() => {
-                        setCurrentTask(task);
-                        setIsOpen(true);
-                      }}
-                      className="shrink-0 rounded-md bg-accent px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-white shadow-lg shadow-accent/10 transition-all duration-200 hover:bg-red-600 hover:shadow-accent/25 active:scale-95"
-                    >
-                      SUBMIT
-                    </button>
-                  )}
+                  <button
+                    onClick={() => {
+                      setCurrentTask(task);
+                      setIsOpen(true);
+                    }}
+                    className="shrink-0 rounded-md bg-accent px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-white shadow-lg shadow-accent/10 transition-all duration-200 hover:bg-red-600 hover:shadow-accent/25 active:scale-95"
+                  >
+                    SUBMIT
+                  </button>
                 </div>
               </motion.div>
             );
