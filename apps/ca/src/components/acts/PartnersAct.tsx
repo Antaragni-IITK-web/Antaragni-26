@@ -17,7 +17,6 @@ const SPONSOR_GROUPS = [
   {
     title: "GOODIES PARTNERS",
     logos: [
-      { id: "wrapcart", src: assets.sponsors.wrapcart, name: "Wrapcart" },
       { id: "soxytoes", src: assets.sponsors.soxytoes, name: "Soxytoes" },
       { id: "drewknot", src: assets.sponsors.drewknot, name: "Drewknot" },
     ],

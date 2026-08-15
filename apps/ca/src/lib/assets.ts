@@ -21,7 +21,6 @@ export const assets = {
   },
   sponsors: {
     finlatics: "/assets/sponsors_new/finlatics.jpg",
-    wrapcart: "/assets/sponsors_new/wrapcart.png",
     soxytoes: "/assets/sponsors_new/Soxytoes.png",
     drewknot: "/assets/sponsors_new/drewknot.png",
     oaHelper: "/assets/sponsors_new/OAHelper.svg",
