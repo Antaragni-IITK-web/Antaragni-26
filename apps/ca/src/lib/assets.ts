@@ -28,6 +28,7 @@ export const assets = {
     nisarg: "/assets/sponsors_new/Nisarg.jpg",
     guvi: "/assets/sponsors_new/GuviHCL.png",
     doremonDen: "/assets/sponsors_new/Doremon.svg",
+    finMaverick: "/assets/sponsors_new/FinMaverick.jpeg",
   },
   cta: {
     silhouette: "/assets/cta/footer-silhouette.webp",

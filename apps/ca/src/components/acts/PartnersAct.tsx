@@ -29,6 +29,7 @@ const SPONSOR_GROUPS = [
       { id: "nisarg", src: assets.sponsors.nisarg, name: "Nisarg Srishti Welfare Foundation" },
       { id: "guvi", src: assets.sponsors.guvi, name: "GUVI" },
       { id: "doremonDen", src: assets.sponsors.doremonDen, name: "Doremon Den" },
+      { id: "finMaverick", src: assets.sponsors.finMaverick, name: "Fin Maverick" },
     ],
   },
 ];
@@ -134,7 +135,7 @@ export function PartnersAct() {
                 {group.title}
               </motion.div>
 
-              <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7">
+              <div className="flex max-w-[1050px] flex-wrap items-center justify-center gap-5 md:gap-7">
                 {group.logos.map((sponsor) => (
                   <LogoChip key={sponsor.id} src={sponsor.src} name={sponsor.name} />
                 ))}
