@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useStore } from "@repo/store";
+import { queryData, updateData } from "@repo/firebase";
 import { CountUp } from "../motion/CountUp";
 
 /** Ambassador tiers — thresholds in points */
@@ -27,11 +29,52 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 export function ProfileTab() {
   const { user } = useStore();
   const data = user?.details;
+  const uid = user?.user?.uid;
+  const [syncedPoints, setSyncedPoints] = useState<number | null>(null);
+
+  useEffect(() => {
+    async function selfHealPoints() {
+      if (!data?.id || !uid) return;
+      
+      try {
+        const submissions = await queryData("CAsSubmissions26", "id", data.id);
+        let taskPointsTotal = 0;
+        
+        submissions.forEach((sub: any) => {
+          if (sub.data && sub.data.award) {
+            taskPointsTotal += Number(sub.data.award) || 0;
+          }
+        });
+        
+        const currentTotalPoints = Number(data.points ?? 0) || 0;
+        const currentTaskPoints = Number(data.taskPoints ?? 0) || 0;
+        
+        if (taskPointsTotal !== currentTaskPoints) {
+          // If taskPoints is missing or out of sync, safely heal Firebase
+          const delta = taskPointsTotal - currentTaskPoints;
+          const newTotalPoints = currentTotalPoints + delta;
+          
+          await updateData("CAs26", uid, { 
+            points: newTotalPoints,
+            taskPoints: taskPointsTotal
+          });
+          
+          setSyncedPoints(newTotalPoints);
+        } else {
+          setSyncedPoints(currentTotalPoints);
+        }
+      } catch (error) {
+        console.error("Error syncing points", error);
+      }
+    }
+    
+    selfHealPoints();
+  }, [data?.id, data?.points, data?.taskPoints, uid]);
 
   if (!data) return <div className="p-10 text-white/50 text-center">Loading profile...</div>;
 
-  const points = Number(data.points ?? 0) || 0;
-  const { current, next, progress } = getTier(points);
+  const displayPoints = syncedPoints !== null ? syncedPoints : (Number(data.points ?? 0) || 0);
+  const { current, next, progress } = getTier(displayPoints);
   const initial = (data.name ?? "?").trim().charAt(0).toUpperCase();
 
   return (
@@ -71,7 +114,7 @@ export function ProfileTab() {
               Legacy Score
             </span>
             <span className="font-serif text-4xl leading-none text-foreground md:text-5xl">
-              <CountUp value={points} duration={1.4} />
+              <CountUp value={displayPoints} duration={1.4} />
             </span>
           </div>
         </div>
@@ -80,7 +123,7 @@ export function ProfileTab() {
         <div className="relative z-10 mt-7">
           <div className="mb-2 flex items-center justify-between text-[9px] uppercase tracking-[0.24em] text-muted md:text-[10px]">
             <span>{current.name}</span>
-            <span>{next ? `${next.min - points} pts to ${next.name}` : "Maximum tier reached"}</span>
+            <span>{next ? `${next.min - displayPoints} pts to ${next.name}` : "Maximum tier reached"}</span>
           </div>
           <div className="h-[5px] w-full overflow-hidden rounded-full bg-white/[0.06]">
             <motion.div
@@ -96,12 +139,12 @@ export function ProfileTab() {
               <div
                 key={t.name}
                 className={`flex items-center gap-2 text-[9px] uppercase tracking-[0.18em] ${
-                  points >= t.min ? "text-gold" : "text-white/25"
+                  displayPoints >= t.min ? "text-gold" : "text-white/25"
                 }`}
               >
                 <span
                   className={`h-1.5 w-1.5 rounded-full ${
-                    points >= t.min ? "bg-gold shadow-[0_0_8px_rgba(212,162,78,0.8)]" : "bg-white/15"
+                    displayPoints >= t.min ? "bg-gold shadow-[0_0_8px_rgba(212,162,78,0.8)]" : "bg-white/15"
                   }`}
                 />
                 {t.name}

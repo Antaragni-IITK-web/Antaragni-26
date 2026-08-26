@@ -66,16 +66,27 @@ export const firebaseLogout = async (setUser: (user: { user: User; details: any 
   }
 };
 
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from './config';
+
 export const firebaseGetUser = async (
   document: string,
   setUser: (user: { user: User; details: any } | null) => void,
   setLoading: (loading: boolean) => void
 ): Promise<void> => {
   try {
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        const details = await getSingleDoc(document, user.uid);
-        setUser({ user, details: details ?? null });
+        const docRef = doc(db, document, user.uid);
+        onSnapshot(docRef, (docSnap) => {
+          if (docSnap.exists()) {
+            setUser({ user, details: docSnap.data() });
+          } else {
+            setUser({ user, details: null });
+          }
+        }, (error) => {
+          console.error("Error in onSnapshot:", error);
+        });
       } else {
         setUser(null);
       }
