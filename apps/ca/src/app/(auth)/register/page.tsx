@@ -64,7 +64,12 @@ export default function Login() {
 				const referrerDoc = rawUsers[0];
 				// Guard against a missing/non-numeric points field writing NaN to Firestore
 				const currentPoints = typeof referrerDoc?.data.points === "number" ? referrerDoc.data.points : 0;
-				await updateData("CAs26", referrerDoc!.uid, { points: currentPoints + 10 });
+				const currentReferralPoints = typeof referrerDoc?.data.referralPoints === "number" ? referrerDoc.data.referralPoints : 0;
+				
+				await updateData("CAs26", referrerDoc!.uid, { 
+					points: currentPoints + 10,
+					referralPoints: currentReferralPoints + 10
+				});
 			}
 		} catch (error) {
 			// [SECURITY] Do not expose raw Firebase error to user
@@ -120,6 +125,7 @@ export default function Login() {
 					insta: insta.trim().slice(0, 200),
 					twitter: twitter.trim().slice(0, 200),
 					points: 0,
+					referralPoints: 0,
 				};
 				const isSuccess = await setData("CAs26", user!.user.uid, UserData);
 				if (!isSuccess) {

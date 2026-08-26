@@ -46,22 +46,47 @@ export function ProfileTab() {
           }
         });
         
-        const currentTotalPoints = Number(data.points ?? 0) || 0;
-        const currentTaskPoints = Number(data.taskPoints ?? 0) || 0;
+        const isMigrated = data.isPointsMigrated;
         
-        if (taskPointsTotal !== currentTaskPoints) {
-          // If taskPoints is missing or out of sync, safely heal Firebase
-          const delta = taskPointsTotal - currentTaskPoints;
-          const newTotalPoints = currentTotalPoints + delta;
+        let trueLegacyPoints = Number(data.points ?? 0) || 0;
+        // Undo the buggy script's inflation if it ran before the migration
+        if (data.taskPoints !== undefined && !isMigrated) {
+          trueLegacyPoints = Math.max(0, trueLegacyPoints - Number(data.taskPoints));
+        }
+
+        if (!isMigrated) {
+          // HEURISTIC MIGRATION
+          let estimatedPastReferrals = 0;
+          if (trueLegacyPoints < taskPointsTotal) {
+            estimatedPastReferrals = trueLegacyPoints;
+          } else {
+            estimatedPastReferrals = trueLegacyPoints - taskPointsTotal;
+          }
+          
+          const knownReferrals = Number(data.referralPoints ?? 0) || 0;
+          const finalReferralPoints = Math.max(estimatedPastReferrals, knownReferrals);
+          const displayPoints = finalReferralPoints + taskPointsTotal;
           
           await updateData("CAs26", uid, { 
-            points: newTotalPoints,
-            taskPoints: taskPointsTotal
+            points: displayPoints,
+            referralPoints: finalReferralPoints,
+            taskPoints: taskPointsTotal,
+            isPointsMigrated: true
           });
-          
-          setSyncedPoints(newTotalPoints);
+          setSyncedPoints(displayPoints);
         } else {
-          setSyncedPoints(currentTotalPoints);
+          // NORMAL SYNC
+          const refPts = Number(data.referralPoints ?? 0) || 0;
+          const displayPoints = refPts + taskPointsTotal;
+          
+          // Only write to DB if the total differs
+          if (data.points !== displayPoints || data.taskPoints !== taskPointsTotal) {
+            await updateData("CAs26", uid, { 
+              points: displayPoints,
+              taskPoints: taskPointsTotal
+            });
+          }
+          setSyncedPoints(displayPoints);
         }
       } catch (error) {
         console.error("Error syncing points", error);
